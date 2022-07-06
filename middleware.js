@@ -4,7 +4,7 @@ const {campgroundSchema, reviewSchema} = require('./schemas');
 
 // Check if user is login
 module.exports.isLoggedIn = (req, res, next) => {
-    console.log(`REQ.USER:${req.user}`);
+    // console.log(`REQ.USER:${req.user}`);
     if(!req.isAuthenticated()) {
         // console.log(req.path, req.originalUrl)
         req.session.returnTo = req.originalUrl;
@@ -16,7 +16,8 @@ module.exports.isLoggedIn = (req, res, next) => {
 
 // Check if camground passed in is valid ex. if required fields are being passed in
 module.exports.validateCampground = (req, res, next) => {
-    const {error} = campgroundSchema.validate(req.body)
+    console.log(`validateCampground:${JSON.stringify(req.body)}`);
+    const {error} = campgroundSchema.validate(req.body);
     if(error) {
         const msg = error.details.map(el => el.message).join(',')
         throw new ExpressError(msg, 400)
