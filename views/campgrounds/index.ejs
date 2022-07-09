@@ -7,7 +7,11 @@
 <div class="card" mb-3>
     <div class="row">
         <div class="col-md-4">
+            <% if (campground.images.length) {%> 
             <img class="img-fluid" alt="" src="<%=campground.images[0].url%>">
+            <% } else { %> 
+                <img src="img-fluid" alt="" src="https://gaptrail.org/wp-content/uploads/2021/02/Dravo-Campground-GAllen-2500x900-1-800x450-c-default.jpg">
+            <% } %> 
         </div>
         <div class="col-md-8">
             <div class="card-body">
