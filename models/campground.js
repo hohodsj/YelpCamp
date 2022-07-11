@@ -14,6 +14,9 @@ ImageSchema.virtual('thumbnail').get(function() {
     return this.url.replace('/upload', '/upload/w_200'); // trim image
 });
 
+// by default mongoose does not create virtual properties when conver to json, set flag to make virtual part of json object
+const opts = {toJSON: {virtuals: true}}; 
+
 const CampGroundSchema = new Schema({
     title: String,
     images: [ImageSchema],
@@ -41,7 +44,14 @@ const CampGroundSchema = new Schema({
             ref: 'Review'
         }
     ]
-})
+}, opts)
+
+// Create virtual property for mapbox to display campground information
+CampGroundSchema.virtual('properties.popUpMarkup').get(function() {
+    return `
+        <strong><a href="/campgrounds/${this._id}">${this.title}</a></strong>
+        <p>${this.description.substring(0,20)}...</p>`;
+});
 
 CampGroundSchema.post('findOneAndDelete', async function(campground) {
     if(campground) {
