@@ -65,6 +65,10 @@ app.use((req, res, next) => {
     next();
 })
 
+app.get('/', (req, res) => {
+    res.render('home')
+});
+
 app.use('/campgrounds', campgroundsRoutes);
 app.use('/campgrounds/:id/reviews', reviewsRoutes);
 app.use('/', userRoutes);
@@ -85,6 +89,3 @@ app.use((err, req, res, next) => {
     res.status(statusCode).render('error', {err});
 })
 
-app.get('/', (req, res) => {
-    res.render('home')
-})

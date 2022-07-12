@@ -17,6 +17,8 @@ new mapboxgl.Marker()
 )
 .addTo(map); // Add Marker
 
+map.addControl(new mapboxgl.NavigationControl(), 'bottom-left');
+
 map.on('style.load', () => {
     map.setFog({}); // Set the default atmosphere style
 });
