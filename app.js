@@ -143,9 +143,9 @@ app.use('/campgrounds', campgroundsRoutes);
 app.use('/campgrounds/:id/reviews', reviewsRoutes);
 app.use('/', userRoutes);
 
-
-app.listen('3000', () => {
-    console.log('LISTENING ON 3000');
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+    console.log(`LISTENING ON ${port}`);
 })
 
 // handle not found paths make sure to put at the end
